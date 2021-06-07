@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML API</title>
+    <!-- <link rel="stylesheet" href="form.css"> -->
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html{
+        font-size: 10px;
+    }
+    body{
+        overflow-x: hidden;
+        font-family: calibri;
+    }
+    .container{
+        width: 100vw;
+        height: 140vh;
+        background: #000000;
+        display: flex;
+        justify-content: center;
+    }
+    .center-container{
+        width: 40%;
+        height: 100vh;
+        box-shadow: 10px 15px 10px rgba(0, 0, 0, 0.5);
+        background: #495552;
+        border: 1px solid #353434;
+        margin-top: 6rem;
+    }
+    .heading{
+        color: #fff;
+        font-size: 3rem;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 1.5rem;
+        position: absolute;
+        display: inline-block;
+        border-bottom: 2px solid #1ed98b;
+    }
+    .form{
+        width: 100%;
+        height: 80%;
+        margin-top: 15%;
+        position: relative;
+    }
+    .wrap{
+        width: 90%;
+        margin: 2rem 5%;
+    }
+    .wrap .label{
+        display: block;
+        color: #dad6d6;
+        font-size: 1.8rem;
+        font-weight: 500;
+        margin: 1rem 0;
+    }
+    .wrap .input100{
+        width: 100%;
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        color: #fff;
+        font-weight: 400;
+        background: transparent;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-bottom: 1px solid #929292;
+        outline: none;
+    }
+    .wrap .input100::placeholder{
+        opacity: 0.5;
+        letter-spacing: 0.7px;
+        font-size: 1.6rem;
+
+    }
+    .wrap .input100:focus{
+        border-bottom: 1px solid #17d1ac;
+        transition: all 0.5s ease;
+    }
+    .submit-btn{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 1rem;
+        padding: 1.5rem 6rem;
+        background: #1ed98b;
+        border-radius: 3rem;
+        color: #000;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        font-weight: 700;
+        outline: none;
+        border: none;
+        box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.5);
+    }
+    .prediction{
+        width: 40vw;
+        height: 10rem;
+        position: absolute;
+        top: 350px;
+        box-shadow: 10px 15px 10px rgba(0, 0, 0, 0.5);
+        background: #fffff7;
+        border: 1px solid #353434;
+    }
+    .prediction h3{
+        color:  #000000;
+        font-size: 1.75rem;
+        margin-top: 2.7rem;
+        margin-left: 1rem;
+    }
+    .prediction h2{
+        color: #000000;
+        font-size: 1.75rem;
+        margin-top: 2.7rem;
+        margin-left: 1rem;
+    }
+    /* @media screen and (max-width: 322px){
+        html{
+            font-size: 6px;
+        }
+        .heading{
+            font-size: 1rem;
+        }
+    }
+    @media screen and (min-width: 323px) and (max-width: 420px){
+        html{
+            font-size: 7.5px;
+        }
+        .heading{
+            font-size: 2rem;
+        }
+        .center-container{
+            width: 80vw;
+            height: 56%;
+        }
+    } */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="center-container">
+            <h1 class="heading">Retail Ecommerce </h1>
+            <form class="form"  method="post">
+
+                <div class="wrap" >
+                    <span class="label">CUSTOMER ID: </span>
+                    <input class="input100" type="text" id="CustomerID" name="CustomerID" placeholder="CustomerID" required="required">
+
+                </div>
+                <button formaction="/predict" class="submit-btn" type="submit" >Check </button><br><br><br><br>
+                <button formaction='/visualisation' class="submit-btn" type = 'submit' > View </button>
+
+
+            </form>
+
+
+
+             <div class="prediction">
+                 {%if value == 1%}
+                 <h3><strong>Yes</strong> Customer with ID {{cid}} will visit </h3>
+
+                 {%elif value == 0%}
+                 <h3> <strong>No</strong> Customer with ID {{cid}} will Not visit </h3>
+                 {%else%}
+                      <h3>{{dis}}</h3>
+                 {%endif%}
+
+            </div>
+            <img scr = '{{ url_for("visualisation") }}'>
+       </div>
+
+
+    </div>
+</body>
+</html>
+
